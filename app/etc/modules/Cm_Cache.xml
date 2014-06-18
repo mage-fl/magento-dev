@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+            <Cm_Cache>
+                        <active>true</active>
+                        <codePool>local</codePool>
+            </Cm_Cache>
+    </modules>
+</config>

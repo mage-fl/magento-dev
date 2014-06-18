@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <import_products module="psl_import">
+                    <title>Import Products</title>
+                    <sort_order>5</sort_order>
+                    <action>adminpslimport/adminhtml_index</action>
+                </import_products>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <psl_import translate="title" module="psl_import">
+                                        <title>Import Products Params</title>
+                                    </psl_import>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

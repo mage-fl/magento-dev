@@ -1,0 +1,192 @@
+<?php if (!Mage::getStoreConfig('askit/general/enabled')) return; ?>
+
+<div class="box-collateral">
+    <h2>
+        <?php  echo Mage::helper('askit')->__('Questions:'); ?>
+    </h2>
+    <div class="askit-product">
+        <?php
+
+        $isLoggedIn  = Mage::getSingleton('customer/session')->isLoggedIn();
+        $isAllowHint = Mage::getStoreConfig('askit/general/allowedHint');
+        $isShareName = Mage::getStoreConfig('askit/general/shareCustomerName');
+
+        $_items = $this->getItems();
+        $_questions = array();
+        foreach( $_items as $_item) {
+            $_questions[] = $_item;
+        }
+        $_countQuestions = count($_questions);
+        if($_countQuestions): ?>
+            <div class="askit-question-list">
+                <?php foreach( $_questions as $_question):
+                        // get answers
+                        $_questionId = $_question->getId();
+                        $_answers = array();
+                        if ($_question->getAnswers()) {
+                            $_answers = $_question->getAnswers()->getItems();
+                        }
+                        $_countAnswers = count($_answers);
+                        // end answers
+                    ?>
+                    <div class="askit-accordion-toggle">
+                        <div class="right">
+                            <?php echo $this->getAnswersCountTitle($_countAnswers); ?>
+                        </div>
+                        <div class="askit-question-text">
+                            <a href="javascript:void(0)" onclick="return false;">
+                                <?php echo //$this->helper('askit')->trim(
+                                    $this->htmlEscape($_question->getText());
+                                    //, 80, '...') ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="askit-accordion-content">
+                        <div class="askit-question-full">
+                            <div class="askit-question-auth">
+                                <?php if ($isShareName): ?>
+                                    <?php
+                                    $_author = ' <span class="askit-author">' . $this->htmlEscape($_question->getCustomerName() ? $_question->getCustomerName() : 'unknown') . '</span>';
+                                    $_time = $this->formatDate($_question->getCreatedTime(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);
+                                    $_ilink = $this->getItemViewLink($_question);
+                                    echo Mage::helper('askit')->__('Posted by %s, %s on %s', $_author, $_time, $_ilink);
+                                    ?>
+                                <?php endif; ?>
+                            </div>
+<!-- -->
+                            <h4>
+                                <?php  echo Mage::helper('askit')->__('Question:'); ?>
+                            </h4>
+                            <p class="askit-question-text-full">
+                                <?php echo $this->htmlEscape($_question->getText()); ?>
+                            </p>
+<!-- -->
+                        </div>
+                        <?php if ($isAllowHint):?>
+                            <?php if ($isLoggedIn && $this->canVoted($_questionId)) :?>
+                            <div class="askit-hintwrapperinner clearer">
+                                <span class="askit-hintwrapper">
+                                    <?php echo Mage::helper('askit')->__('Do you have same question?'); ?>
+                                </span>
+                                <button class="button" onclick="setLocation('<?php echo $this->getHintAction($_questionId); ?>')">
+                                    <span><span>
+                                        <?php echo Mage::helper('askit')->__('Vote for It'); ?>
+                                    </span></span>
+                                </button>
+                            </div>
+                            <?php endif;?>
+                        <?php endif;?>
+                        <?php if (0 < $_question->getHint()) : ?>
+                            <div class="askit-same">
+                                <?php echo Mage::helper('askit')->__('%s people had same question.', $_question->getHint()); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php
+                        if ($_countAnswers) :
+
+                            /* @var $helper Mage_Cms_Helper_Data */
+                            $cmsHelper = Mage::helper('cms');
+                            $processor = $cmsHelper->getBlockTemplateProcessor();
+    //                        $html = $processor->filter($block->getContent());
+                            ?>
+                            <!-- -->
+                            <h4>
+                                <?php  echo Mage::helper('askit')->__('Answers:'); ?>
+                            </h4>
+                            <!-- -->
+                            <ul class="askit-query-answer-list">
+                                <?php
+                                $_iterator = 0;
+                                $_countAnswers = count($_answers);
+                                foreach($_answers as $_answer): ?>
+                                 <li<?php if( 1 == ++$_iterator && $_countAnswers != 1 ):
+                                         ?> class="first"<?php
+                                     elseif($_iterator == $_countAnswers):
+                                         ?> class="last"<?php
+                                     endif; ?>>
+                                     <div class="askit-query-answer">
+                                         <div class="askit-question-answer-info">
+                                             <?php if ($isShareName):?>
+                                             <small>
+                                                <?php
+                                                $_customerName = $this->htmlEscape($_answer->getCustomerName());
+                                                if (function_exists('mb_convert_case')) {
+                                                    $_customerName = mb_convert_case($_customerName, MB_CASE_TITLE, "UTF-8");
+                                                }
+                                                $_author = '<span class="askit-author">'
+                                                        . $_customerName
+                                                    . '</span>';
+                                                $_time = $this->formatDate(
+                                                    $_question->getCreatedTime(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL
+                                                );
+                                                echo Mage::helper('askit')->__('Posted by %s on %s', $_author, $_time);
+                                                ?>
+
+                                             </small>
+                                             <?php endif;?>
+                                         </div>
+                                         <div class="askit-question-answer-text">
+                                            <?php echo $processor->filter($_answer->getText());?>
+                                         </div>
+                                         <?php if ($isAllowHint):?>
+                                            <?php if ($isLoggedIn && $this->canVoted($_answer->getId())) :?>
+                                                <div class="askit-hintwrapper right">
+                                                    <p><?php echo Mage::helper('askit')->__('Was this Answer Helpful?'); ?></p>
+                                                    <div class="dec-question-hint">
+                                                        <a href="#" onclick="setLocation('<?php echo $this->getHintAction($_answer->getId()); ?>')">
+                                                            <?php echo Mage::helper('askit')->__('Yes')?>
+                                                        </a>
+                                                    </div>
+                                                    <div class="inc-question-hint">
+                                                        <a href="#"  onclick="setLocation('<?php echo $this->getHintAction($_answer->getId(), false); ?>')">
+                                                            <?php echo Mage::helper('askit')->__('No')?>
+                                                        </a>
+                                                    </div>
+                                                  </div>
+                                                <div class="clearer"></div>
+                                             <?php endif;?>
+                                             <?php if(0 < $_answer->getHint()) : ?>
+                                                <div class="clearer askit-same">
+                                                    <?php echo Mage::helper('askit')->__('%s people found this answer helpful.', $_answer->getHint()); ?>
+                                                </div>
+                                             <?php endif; ?>
+                                          <?php endif;?>
+                                     </div>
+                                 </li>
+                                <?php endforeach;?>
+
+                            </ul>
+                        <?php endif;?>
+                        <?php
+                            $child = $this->getChild('askit_new_answer_form');
+                            if ($child) {
+                                $child
+                                    ->setQuestionId($_questionId)
+                                    ->setFormAction(
+                                    $this->getNewAnswerFormAction($_questionId)
+                                );
+                                echo $child->toHTML();
+                            }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+                <div class="left">
+                    <?php echo $this->getAskitActionLink()?>
+                </div>
+
+            </div>
+        <?php else: ?>
+            <p class="askit-noquestion">
+                <?php echo $this->__('There are no product questions yet.'); ?>
+            </p>
+        <?php endif; ?>
+        <?php
+            $child = $this->getChild('askit_new_question_form');
+            if ($child) {
+                $child->setFormAction($this->getNewQuestionFormAction());
+                echo $child->toHTML();
+            }
+        ?>
+    </div>
+</div>

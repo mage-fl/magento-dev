@@ -1,4 +1,4 @@
 magento-dev
 ===========
 
-magento temporal fleshlight repository
+Magento dev repository

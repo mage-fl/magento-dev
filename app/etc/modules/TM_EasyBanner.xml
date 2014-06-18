@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * DO NOT REMOVE OR MODIFY THIS NOTICE
+ * 
+ * EasyBanner module for Magento - flexible banner management
+ * 
+ * @author Templates-Master Team <www.templates-master.com>
+ */
+-->
+<config>
+    <modules>
+        <TM_EasyBanner>
+            <active>true</active>
+            <codePool>local</codePool>
+            <tm_link><![CDATA[http://templates-master.com/magento-extensions/magento-easy-banners.html]]></tm_link>
+        </TM_EasyBanner>
+    </modules>
+</config>

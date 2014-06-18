@@ -1,0 +1,37 @@
+<?php if (!Mage::getStoreConfig('ajax_pro/catalogCategoryView/enabled')) {
+    return;
+}?>
+<?php
+    $layout = $this->getLayout();
+    $block  = $layout->getBlock('product_list_toolbar_pager');
+
+    if ($block && !$block->getCollection()) {
+        $toolbarBlock = $layout->getBlock('product_list_toolbar');
+        if ($toolbarBlock && $collection = $toolbarBlock->getCollection()) {
+            $block->setCollection($collection);
+        }
+    }
+
+    if (!$block || !$block->getCollection()) {
+        return;
+    }
+
+    $_url = $block->getUrl(
+        '*/*/*', array(
+        '_current' => true,
+        '_escape'  => false,
+//        '_use_rewrite' => true,
+        '_query'   => array($block->getPageVarName() => '.page.')
+    ));
+?>
+<script type="text/javascript">
+//<![CDATA[
+
+    AjaxPro.toolbar
+        .setPage(<?php echo $block->getCurrentPage(); ?>)
+        .setLimit(<?php echo $block->getLimit()?>)
+        .setTotal(<?php echo $block->getTotalNum()?>)
+        .setUrl('<?php echo $_url ?>')
+    ;
+//]]>
+</script>

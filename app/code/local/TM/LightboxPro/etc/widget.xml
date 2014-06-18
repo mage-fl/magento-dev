@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <lightboxpro_image type="lightboxpro/image">
+        <name>LightboxPro Image</name>
+        <description type="desc">Add image to store with Lightbox Pro(highslide)</description>
+        <parameters>
+<!--
+            <upload>
+                <label>Image</label>
+                <type>lightboxpro/adminhtml_widget_image</type>
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+                <description>Select image file</description>
+            </upload>
+            -->
+            <path>
+<!--                <type>text</type>-->
+                <type>lightboxpro/adminhtml_widget_image</type>
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+            </path>
+            <title>
+                <label>Image title</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>1</required>
+            </title>
+            <thumbnailwidth>
+                <label>Thumbnail Width</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value>150</value>
+            </thumbnailwidth>
+            <thumbnailheight>
+                <label>Thumbnail Height</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value>150</value>
+            </thumbnailheight>
+        </parameters>
+    </lightboxpro_image>
+
+    <lightboxpro_html type="lightboxpro/html">
+        <name>LightboxPro Inner Html</name>
+        <description type="desc">Add Html to store with Lightbox Pro(highslide)</description>
+        <parameters>
+            <tooltip>
+                <label>Tooltip</label>
+                <type>text</type>
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+            </tooltip>
+            <title>
+                <label>Title</label>
+                <type>text</type>
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+            </title>
+            <content>
+                <label>Content</label>
+                <type>textarea</type>
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+            </content>
+            <!--
+            <width>
+                <label>Width</label>
+                <type>text</type>
+                <visible>1</visible>
+                <value>400</value>
+            </width>
+            -->
+        </parameters>
+    </lightboxpro_html>
+
+    <lightboxpro_gallery type="lightboxpro/gallery">
+        <name>LightboxPro Gallery</name>
+        <description type="desc">Add gallery images to store with Lightbox Pro(highslide)</description>
+        <parameters>
+            <data>
+                <label>Gallery</label>
+                <type>lightboxpro/adminhtml_widget_gallery</type>
+                <!-- <type>gallery</type> -->
+                <required>1</required>
+                <visible>1</visible>
+                <value></value>
+            </data>
+<!--
+            <title>
+                <label>Image title</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>1</required>
+            </title>
+            <thumbnailwidth>
+                <label>Thumbnail Width</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value>150</value>
+            </thumbnailwidth>
+            <thumbnailheight>
+                <label>Thumbnail Height</label>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value>150</value>
+            </thumbnailheight>
+-->
+        </parameters>
+    </lightboxpro_gallery>
+
+</widgets>

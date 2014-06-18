@@ -1,0 +1,61 @@
+# ignore all these kinds of local files, add more as needed
+*.diff
+*.patch
+*.swp
+*.swo
+.project
+.svn
+tags
+
+# ignore .htaccess, we will softlink to files like dev.htaccess or prod.htaccess
+/.htaccess
+
+# ignore .modman
+/.modman
+
+# ignore sitemap.xml
+/sitemap.xml
+
+# ignore local.xml, we will softlink to files like local.dev.xml or local.prod.xml
+/app/etc/local.xml
+
+# no catalog image files, we will have a separate script to fetch those
+/media/catalog/*
+/media/tmp
+
+# ignore almost everthing in var
+/var/ait_install
+/var/ait_rewrite
+/var/backups
+/var/cache
+/var/connect
+/var/export
+/var/full_page_cache
+/var/import
+/var/importexport
+/var/locks
+/var/log
+/var/package
+/var/report
+/var/resource_config.json
+/var/session
+/var/tmp
+
+# these can be helpful in dev, but ignore them
+apc.php
+phpinfo.php
+
+# ignore all this stuff
+/downloader/.cache/
+/downloader/cache.cfg
+/downloader/connect.cfg
+/staging
+/pkginfo
+
+/includes/config.php
+
+# modman installed modules
+# distributor attributes
+# https://github.com/ilfllc-dev/distributor-attributes
+# app/code/local/FLI/Distattributes
+# app/etc/modules/FLI_Distattributes.xml

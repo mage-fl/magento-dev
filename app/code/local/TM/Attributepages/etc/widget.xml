@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<widgets>
+    <attributepages_attribute_list type="attributepages/widget_attribute_list" translate="name" module="attributepages">
+        <name>Attributepages: List of attribute based pages</name>
+        <parameters>
+            <title translate="label">
+                <visible>1</visible>
+                <label>Title</label>
+                <type>text</type>
+            </title>
+            <column_count translate="label description">
+                <visible>1</visible>
+                <required>1</required>
+                <value>1</value>
+                <label>Columns Count</label>
+                <description>1 — 8 columns are supported</description>
+                <type>text</type>
+            </column_count>
+            <excluded_pages translate="label description">
+                <visible>1</visible>
+                <label>Pages to exclude</label>
+                <description>Comma separated page identifiers. Live empty to disable filter</description>
+                <type>text</type>
+            </excluded_pages>
+            <included_pages translate="label description">
+                <visible>1</visible>
+                <label>Pages to include</label>
+                <description>Comma separated page identifiers. Live empty to disable filter</description>
+                <type>text</type>
+            </included_pages>
+            <remove_block_wrapper translate="label">
+                <visible>1</visible>
+                <label>Remove Block Wrapper and Title</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+            </remove_block_wrapper>
+        </parameters>
+    </attributepages_attribute_list>
+    <attributepages_option_list type="attributepages/widget_option_list" translate="name" module="attributepages">
+        <name>Attributepages: Option List</name>
+        <parameters>
+            <identifier translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Attribute Page Url Key</label>
+                <type>text</type>
+            </identifier>
+            <title translate="label">
+                <visible>1</visible>
+                <label>Title</label>
+                <type>text</type>
+            </title>
+            <listing_mode translate="label">
+                <visible>1</visible>
+                <label>Mode</label>
+                <type>select</type>
+                <values>
+                    <image translate="label">
+                        <value>image</value>
+                        <label>Image</label>
+                    </image>
+                    <link translate="label">
+                        <value>link</value>
+                        <label>Link</label>
+                    </link>
+                </values>
+            </listing_mode>
+            <image_width translate="label">
+                <visible>1</visible>
+                <label>Image Width</label>
+                <type>text</type>
+                <depends>
+                    <listing_mode>
+                        <value>image</value>
+                    </listing_mode>
+                </depends>
+            </image_width>
+            <image_height translate="label">
+                <visible>1</visible>
+                <label>Image Height</label>
+                <type>text</type>
+                <depends>
+                    <listing_mode>
+                        <value>image</value>
+                    </listing_mode>
+                </depends>
+            </image_height>
+            <is_slider translate="label">
+                <visible>1</visible>
+                <label>Show as Slider</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+            </is_slider>
+            <slider_id translate="label">
+                <visible>1</visible>
+                <label>Unique Slider Id</label>
+                <type>text</type>
+                <depends>
+                    <is_slider>
+                        <value>1</value>
+                    </is_slider>
+                </depends>
+            </slider_id>
+            <column_count translate="label description">
+                <visible>1</visible>
+                <value>4</value>
+                <label>Columns Count</label>
+                <description>1 — 8 columns are supported</description>
+                <type>text</type>
+                <depends>
+                    <is_slider>
+                        <value>0</value>
+                    </is_slider>
+                </depends>
+            </column_count>
+            <group_by_first_letter translate="label">
+                <visible>1</visible>
+                <label>Group Options by First Letter</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <depends>
+                    <is_slider>
+                        <value>0</value>
+                    </is_slider>
+                </depends>
+            </group_by_first_letter>
+            <remove_block_wrapper translate="label">
+                <visible>1</visible>
+                <label>Remove Block Wrapper and Title</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+            </remove_block_wrapper>
+        </parameters>
+    </attributepages_option_list>
+</widgets>

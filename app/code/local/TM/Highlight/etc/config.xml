@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <TM_Highlight>
+            <version>2.4.2.1</version>
+        </TM_Highlight>
+    </modules>
+
+    <global>
+        <models>
+            <highlight>
+                <class>TM_Highlight_Model</class>
+                <resourceModel>highlight_resource_eav_mysql4</resourceModel>
+            </highlight>
+            <highlight_resource_eav_mysql4>
+                <class>TM_Highlight_Model_Resource_Eav_Mysql4</class>
+            </highlight_resource_eav_mysql4>
+        </models>
+        <blocks>
+            <highlight>
+                <class>TM_Highlight_Block</class>
+            </highlight>
+        </blocks>
+        <helpers>
+            <highlight>
+                <class>TM_Highlight_Helper</class>
+            </highlight>
+        </helpers>
+    </global>
+
+    <frontend>
+        <translate>
+            <modules>
+                <TM_Highlight>
+                     <files>
+                          <default>TM_Highlight.csv</default>
+                     </files>
+                </TM_Highlight>
+            </modules>
+        </translate>
+        <layout>
+             <updates>
+                  <highlight>
+                        <file>tm/highlight.xml</file>
+                  </highlight>
+             </updates>
+        </layout>
+        <routers>
+            <highlight>
+                <use>standard</use>
+                <args>
+                    <module>TM_Highlight</module>
+                    <frontName>highlight</frontName>
+                </args>
+            </highlight>
+        </routers>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <TM_Highlight>
+                    <files>
+                        <default>TM_Highlight.csv</default>
+                    </files>
+                </TM_Highlight>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>

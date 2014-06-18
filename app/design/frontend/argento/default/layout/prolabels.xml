@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="prolabels/general/enabled">
+                <type>skin_css</type>
+                <name>css/prolabel.css</name>
+            </action>
+        </reference>
+    </default>
+</layout>

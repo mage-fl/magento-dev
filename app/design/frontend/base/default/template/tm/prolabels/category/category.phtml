@@ -1,0 +1,24 @@
+<?php if (Mage::getStoreConfig('prolabels/general/enabled')) : ?>
+    <?php $labels = $this->getContentLabels(); ?>
+
+    <?php $_helper = Mage::helper('prolabels') ?>
+    <?php $product = $this->getProduct() ?>
+    <div class="prolabels-content-wrapper">
+        <ul class="tt-wrapper prolabels-content-labels">
+            <?php if ($_helper->isMobileMode()) : ?>
+                <?php echo $_helper->getMobileLabels($product, 'category') ?>
+            <?php endif; ?>
+            <?php foreach ($labels as $label) : ?>
+                <li>
+                    <a class="tt-gplus" href="#" onclick="return false;">
+                        <img alt="" src="<?php echo Mage::getBaseUrl('media') . "/prolabel/" . $label['product_image'] ?>">
+                        <?php if ('' !== $tooltipText=$this->getLabelText($label, 'category')) : ?>
+                            <span class="tooltip-label"><?php echo $tooltipText; ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <div class="clearer"></div>
+    </div>
+<?php endif; ?>

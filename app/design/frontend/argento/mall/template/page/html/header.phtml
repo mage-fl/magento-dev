@@ -1,0 +1,99 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<div class="top-toolbar-container">
+    <div class="top-toolbar">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
+        <div class="quick-links">
+            <p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+            <?php echo $this->getChildHtml('topLinks') ?>
+        </div>
+    </div>
+</div>
+<div class="header-container">
+    <div class="header">
+        <div class="logo-wrapper">
+            <?php if ($this->getIsHomePage()):?>
+            <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <?php else:?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+        </div>
+        <div class="header-content">
+            <?php echo $this->getChildHtml('store_language') ?>
+            <?php echo $this->getChildHtml('headerCart') ?>
+            <div class="mobile-togglers">
+                <?php
+                    $menuId = 'nav';
+                    $navpro = $this->getLayout()->getBlock('navigationpro.top');
+                    if ($navpro && $navpro->getEnabled()) {
+                        $menuId = $navpro->getHtmlId() . '-mobile';
+                    }
+                ?>
+                <span class="navpro-mobile-toggle-icon navpro-mobile-toggle" data-menu="<?php echo $menuId ?>">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </span>
+                <a href="javascript:void(0)" id="mobile-search-toggle" title="<?php echo $this->__('Search') ?>"><span><span class="icon-search"></span></span></a>
+            </div>
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+        <?php $menu = $this->getChildHtml('topMenu') ?>
+        <?php if (!empty($menu)) : ?>
+            <?php if (!$navpro || !$navpro->getEnabled()) : ?>
+                <div class="navpro-mobile-toggle" data-menu="nav">
+                    <span class="navpro-mobile-toggle-icon">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </span>
+                    <span class="navpro-mobile-toggle-label"><?php echo $this->__('Menu') ?></span>
+                </div>
+            <?php endif ?>
+            <?php echo $menu ?>
+        <?php endif; ?>
+    </div>
+
+    <?php echo $this->getChildHtml('topContainer'); ?>
+</div>
+
+<script type="text/javascript">
+document.observe('dom:loaded', function() {
+    new MobileNavigation();
+
+    var searchToggle = $('mobile-search-toggle'),
+        searchForm = $('search_mini_form');
+    if (searchToggle && searchForm) {
+        searchToggle.observe('click', function() {
+            searchForm.toggleClassName('shown');
+        });
+    }
+});
+</script>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_Argento>
+            <active>true</active>
+            <codePool>local</codePool>
+            <tm_hidden>1</tm_hidden>
+            <depends>
+                <TM_AjaxPro/>
+                <TM_AjaxSearch/>
+                <TM_AskIt/>
+                <TM_Core/>
+                <TM_EasyBanner/>
+                <TM_EasyCatalogImg/>
+                <TM_Easyslide/>
+                <TM_EasyTabs/>
+                <TM_Highlight/>
+                <TM_LightboxPro/>
+                <TM_NavigationPro/>
+                <TM_ProLabels/>
+                <TM_RichSnippets/>
+                <TM_SoldTogether/>
+                <TM_SuggestPage/>
+            </depends>
+        </TM_Argento>
+    </modules>
+</config>

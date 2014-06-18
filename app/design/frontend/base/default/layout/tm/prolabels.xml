@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="prolabels/general/enabled">
+                <type>skin_css</type>
+                <name>css/tm/prolabel.css</name>
+            </action>
+            <action method="addItem" ifconfig="prolabels/general/enabled">
+                <type>skin_css</type>
+                <name>css/tm/prolabels-tooltip.css</name>
+            </action>
+            <action method="addItem" ifconfig="prolabels/general/enabled">
+                <type>skin_js</type>
+                <name>js/tm/prolabels-tooltip.js</name>
+            </action>
+        </reference>
+    </default>
+    <catalog_category_default>
+        <reference name="before_body_end">
+            <block type="core/template" name="prolabels.category.tooltip">
+                <action method="setTemplate" ifconfig="prolabels/general/enabled">
+                    <template>tm/prolabels/category/tooltip.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="before_body_end">
+            <block type="core/template" name="prolabels.category.tooltip">
+                <action method="setTemplate" ifconfig="prolabels/general/enabled">
+                    <template>tm/prolabels/category/tooltip.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_result_index>
+        <reference name="before_body_end">
+            <block type="core/template" name="prolabels.category.tooltip">
+                <action method="setTemplate" ifconfig="prolabels/general/enabled">
+                    <template>tm/prolabels/category/tooltip.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_result>
+        <reference name="before_body_end">
+            <block type="core/template" name="prolabels.category.tooltip">
+                <action method="setTemplate" ifconfig="prolabels/general/enabled">
+                    <template>tm/prolabels/category/tooltip.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalogsearch_advanced_result>
+</layout>

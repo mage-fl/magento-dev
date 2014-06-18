@@ -1,0 +1,40 @@
+<?php if (Mage::getStoreConfig('prolabels/general/enabled')) : ?>
+    <?php $labels = $this->getContentLabels(); ?>
+    <?php $_helper = Mage::helper('prolabels') ?>
+    <?php $product = Mage::registry('current_product') ?>
+    <div class="prolabels-content-wrapper">
+        <ul class="tt-wrapper prolabels-content-labels">
+            <?php if ($_helper->isMobileMode()) : ?>
+                <?php echo $_helper->getMobileLabels($product, 'product') ?>
+            <?php endif; ?>
+            <?php foreach ($labels as $label) : ?>
+                <li>
+                    <a class="tt-gplus" href="#" onclick="return false;">
+                        <img alt="" src="<?php echo Mage::getBaseUrl('media') . "/prolabel/" . $label['product_image'] ?>">
+                        <?php if ('' !== $tooltipText=$this->getLabelText($label, 'product')) : ?>
+                            <span class="tooltip-label"><?php echo $tooltipText; ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function initProLabelsTooltip(){
+            var ProlabelsTooltip = new ProLabelsTooltip({
+                'background' : '<?php echo Mage::getStoreConfig('prolabels/tooltip/background') ?>',
+                'color'      : '<?php echo Mage::getStoreConfig('prolabels/tooltip/color') ?>'
+            });
+        }
+
+        if (Prototype.Browser.IE) {
+            Event.observe(window, 'load', function(){
+                initProLabelsTooltip();
+            });
+        } else {
+            document.observe("dom:loaded", function(){
+                initProLabelsTooltip();
+            });
+        }
+    </script>
+<?php endif; ?>

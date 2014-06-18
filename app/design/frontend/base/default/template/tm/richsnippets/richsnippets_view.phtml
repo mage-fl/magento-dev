@@ -1,0 +1,45 @@
+<?php
+    $_helper     = $this->helper('catalog/output');
+    $_product    = $this->getProduct();
+    $_coreHelper = $this->helper('core');
+    $_taxHelper  = $this->helper('tax');
+?>
+
+<?php if (Mage::getStoreConfig('richsnippets/display/image')) : ?>
+    <meta itemprop="image" content="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" />
+<?php endif ?>
+
+    <meta itemprop="productID" content="<?php echo $_product->getSku(); ?>" />
+
+<?php $manufacturer = Mage::getStoreConfig('richsnippets/general/manufacturer'); ?>
+<?php if ($manufacturer && Mage::getStoreConfig('richsnippets/display/manufacturer')) : ?>
+    <meta itemprop="manufacturer" content="<?php echo $this->getAttributeText($manufacturer) ; ?>" />
+<?php endif; ?>
+
+<?php
+    $price = $this->getPriceValues();
+    $itemtype = 'http://schema.org/Offer';
+    if (is_array($price)) :
+        $itemtype = 'http://schema.org/AggregateOffer';
+    endif;
+?>
+<div itemprop="offers" itemscope itemtype="<?php echo $itemtype ?>">
+    <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrency()->getCode() ?>" />
+    <?php if (is_array($price)) : ?>
+    <meta itemprop="lowPrice" content="<?php echo $this->getFormattedPrice($price[0]); ?>"/>
+        <?php if (isset($price[1])) : // grouped products fix ?>
+            <meta itemprop="highPrice" content="<?php echo $this->getFormattedPrice($price[1]); ?>"/>
+        <?php endif; ?>
+    <?php else: ?>
+        <meta itemprop="price" content="<?php echo $this->getFormattedPrice($price); ?>"/>
+    <?php endif; ?>
+
+    <?php if (Mage::getStoreConfig('richsnippets/display/stock_status')) : ?>
+        <link itemprop="availability" href="<?php echo $this->getStockStatusUrl(); ?>"/>
+    <?php endif; ?>
+
+    <?php $seller = str_replace("\"", "'", Mage::getStoreConfig('richsnippets/general/seller')); ?>
+    <?php if ($seller && Mage::getStoreConfig('richsnippets/display/seller')) : ?>
+        <meta itemprop="seller" content="<?php echo $this->escapeHtml($seller); ?>"/>
+    <?php endif; ?>
+</div>

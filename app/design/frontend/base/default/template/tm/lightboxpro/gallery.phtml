@@ -1,0 +1,64 @@
+<?php
+    $gallery = Zend_Json::decode(urldecode($this->getData('data')));
+    $slideshowGroupId = uniqid('slideshowGroup');
+?>
+<script type="text/javascript">
+    // Add the slideshow controller
+    hs.addSlideshow({
+        slideshowGroup: '<?php echo $slideshowGroupId?>',
+        interval: <?php echo Mage::getStoreConfig('lightboxpro/gallery/behaviour_interval'); ?>,
+        repeat: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/behaviour_repeat') ? 'true' : 'false'); ?>,
+        <?php
+        $style = Mage::getStoreConfig('lightboxpro/gallery/controls_presetstyle');
+        if ($style) :?>
+        useControls: true,
+        fixedControls: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/behaviour_fixedControls') ? "'fit'" : 'false'); ?>,
+        overlayOptions: {
+            <?php echo "className: '{$style}',\n";?>
+            opacity: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_opacity')?>,
+            position: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_position');?>',
+            offsetX: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_xOffset')?>,
+            offsetY: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_yOffset')?>,
+            hideOnMouseOut: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/controls_hideOnMouseOut') ? 'true' : 'false')?>
+        },<?php endif;
+        if (Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_enable')) :?>
+        thumbstrip: {
+            mode: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_mode')?>',
+            position: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_position')?>',
+            relativeTo: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_relative')?>'
+        }
+        <?php endif; ?>
+    });
+
+    // gallery config object
+    var config<?php echo $slideshowGroupId?> = {
+        <?php $position = Mage::getStoreConfig('lightboxpro/gallery/numbers_position');
+            echo ($position ? "numberPosition: '{$position}',\n" : '')?>
+        slideshowGroup: '<?php echo $slideshowGroupId?>',
+        <?php if (Mage::getStoreConfig('lightboxpro/gallery/behaviour_autoplay')) :?>
+        autoplay: true,
+        <?php endif;?>
+        transitions: ['expand', 'crossfade']
+    };
+</script>
+
+<div class="highslide-gallery">
+    <ul>
+        <?php
+        list($_thumbnailWidth, $_thumbnailHeight) = explode('x', Mage::getStoreConfig('lightboxpro/size/thumbnail'));
+        foreach ($gallery as $_item) :
+            $_src = $_item['src'];
+            $_caption = $_item['caption'];
+        ?>
+        <li>
+            <a href="<?php echo Mage::helper('lightboxpro/image')->setImage($_src);?>"
+                    class="highslide"
+                    title="<?php echo $_caption?>"
+                    onclick="return hs.expand(this, config<?php echo $slideshowGroupId?>)">
+                <img src="<?php echo Mage::helper('lightboxpro/image')->setImage($_src)->resize($_thumbnailWidth, $_thumbnailHeight);?>"  alt=""/>
+            </a>
+        </li>
+        <?php endforeach;?>
+    </ul>
+    <div style="clear:both"></div>
+</div>

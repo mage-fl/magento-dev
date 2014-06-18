@@ -1,0 +1,51 @@
+<?php
+/**
+ * Side menu for store
+ *
+ * @see TM_NavigationPro_Block_Navigation
+ */
+?>
+<?php
+    $_menu = $this->getHtml('level-top');
+    $_id   = $this->getHtmlId();
+?>
+
+<?php if ($_menu) : ?>
+<div class="block block-navpro">
+    <div class="block-title"><strong><span><?php echo $this->__('Navigation') ?></span></strong></div>
+    <div class="block-content">
+        <ul id="<?php echo $_id ?>" class="navpro <?php echo $this->getStyle() ?>">
+            <?php echo $_menu ?>
+        </ul>
+        <?php if ($this->getCreateMobileMenu()) : ?>
+            <?php $_mobileId = $_id . '-mobile'; ?>
+            <ul id="<?php echo $_mobileId ?>" class="navpro-mobile <?php echo $this->getStyle() ?>">
+                <?php echo $_menu ?>
+            </ul>
+            <script type="text/javascript">
+            document.observe("dom:loaded", function() {
+                navPro("<?php echo $_mobileId ?>", {
+                    show_delay: 100,
+                    hide_delay: 100,
+                    dropdown_side: "<?php echo $this->getDropdownSide() ?>",
+                    fit_width: false
+                });
+            });
+            transformMenu('<?php echo $_mobileId ?>');
+            new accordion('<?php echo $_mobileId ?>');
+            </script>
+        <?php endif ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+document.observe("dom:loaded", function() {
+    navPro("<?php echo $_id ?>", {
+        show_delay: 100,
+        hide_delay: 100,
+        dropdown_side: "<?php echo $this->getDropdownSide() ?>"
+    });
+});
+new accordion('<?php echo $_id ?>');
+</script>
+<?php endif ?>

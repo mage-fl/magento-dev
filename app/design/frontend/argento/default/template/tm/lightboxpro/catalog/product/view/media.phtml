@@ -1,0 +1,78 @@
+<?php
+    $slideshowGroupId = uniqid('slideshowGroup');
+?>
+<script type="text/javascript">
+    // Add the slideshow controller
+    hs.addSlideshow({
+        slideshowGroup: '<?php echo $slideshowGroupId?>',
+        interval: <?php echo Mage::getStoreConfig('lightboxpro/gallery/behaviour_interval'); ?>,
+        repeat: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/behaviour_repeat') ? 'true' : 'false'); ?>,
+        <?php $style = Mage::getStoreConfig('lightboxpro/gallery/controls_presetstyle');
+        if ($style) :?>
+        useControls: true,
+        fixedControls: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/behaviour_fixedControls') ? "'fit'" : 'false'); ?>,
+        overlayOptions: {
+            <?php echo "className: '{$style}',\n";?>
+            opacity: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_opacity')?>,
+            position: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_position');?>',
+            offsetX: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_xOffset')?>,
+            offsetY: <?php echo Mage::getStoreConfig('lightboxpro/gallery/controls_yOffset')?>,
+            hideOnMouseOut: <?php echo (Mage::getStoreConfig('lightboxpro/gallery/controls_hideOnMouseOut') ? 'true' : 'false')?>
+        },<?php endif;
+        if (Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_enable')) :?>
+        thumbstrip: {
+            mode: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_mode')?>',
+            position: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_position')?>',
+            relativeTo: '<?php echo Mage::getStoreConfig('lightboxpro/gallery/thumbstrip_relative')?>'
+        }
+        <?php endif; ?>
+    });
+
+    // gallery config object
+    var config<?php echo $slideshowGroupId?> = {
+
+        <?php $position = Mage::getStoreConfig('lightboxpro/gallery/numbers_position');
+            echo ($position ? "numberPosition: '{$position}',\n" : '')?>
+        slideshowGroup: '<?php echo $slideshowGroupId?>',
+        <?php if (Mage::getStoreConfig('lightboxpro/gallery/behaviour_autoplay')) :?>
+        autoplay: true,
+        <?php endif;?>
+        transitions: ['expand', 'crossfade']
+    };
+</script>
+<?php
+    $_product = $this->getProduct();
+    $label = $this->htmlEscape($this->getImageLabel());
+    list($_popupWidth, $_popupHeight)         = explode('x', Mage::getStoreConfig('lightboxpro/size/popup'));
+    list($_mainWidth, $_mainHeight)           = explode('x', Mage::getStoreConfig('lightboxpro/size/main'));
+    list($_thumbnailWidth, $_thumbnailHeight) = explode('x', Mage::getStoreConfig('lightboxpro/size/thumbnail'));
+?>
+<div class="highslide-gallery">
+    <div class="prolabel-wrapper">
+        <?php echo Mage::helper('prolabels')->getLabel($_product, 'product'); ?>
+        <a href="<?php echo $this->helper('lightboxpro/image')->init($_product, 'image')/*->resize($_popupWidth, $_popupHeight);*/?>"
+                class="highslide"
+                title="<?php echo $label?>"
+                onclick="return hs.expand(this, config<?php echo $slideshowGroupId?>)">
+            <img src="<?php echo $this->helper('lightboxpro/image')->init($_product, 'image')->resize($_mainWidth, $_mainHeight);?>"  alt="<?php echo $label?>"/>
+        </a>
+    </div>
+    <?php $_images = $this->getGalleryImages();
+    if (count($_images)) : ?>
+    <div class="more-views">
+        <h2><?php echo Mage::helper('catalog')->__('More Views') ?></h2>
+        <?php foreach ($_images as $_image) :
+            $_label = $this->htmlEscape($_image->getLabel());
+            if (empty($_label)) {
+                $_label = $label;
+            }?>
+            <a href="<?php echo $this->helper('lightboxpro/image')->init($_product, 'image', $_image->getFile())/*->resize($_popupWidth, $_popupHeight);*/?>"
+                    class="highslide"
+                    title="<?php echo $_label?>"
+                    onclick="return hs.expand(this, config<?php echo $slideshowGroupId?>)">
+                <img src="<?php echo $this->helper('lightboxpro/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($_thumbnailWidth, $_thumbnailHeight);?>"  alt="<?php echo $_label?>"/>
+            </a>
+        <?php endforeach;?>
+    </div>
+    <?php endif;?>
+</div>

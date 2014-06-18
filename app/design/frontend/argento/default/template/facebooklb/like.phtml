@@ -1,0 +1,15 @@
+<?php if (Mage::getStoreConfig('facebooklb/general/enabled')) : ?>
+    <?php if (Mage::getStoreConfig('facebooklb/productlike/enabled')) : ?>
+        <div id="fb-root"></div>
+        <fb:like
+            href="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>"
+            send="<?php if (Mage::getStoreConfig('facebooklb/productlike/send')) : ?>true<?php else: ?>false<?php endif; ?>"
+            layout="<?php echo Mage::getStoreConfig('facebooklb/productlike/layout'); ?>"
+            show_faces="<?php if (Mage::getStoreConfig('facebooklb/productlike/showfaces')) : ?>true<?php else: ?>false<?php endif; ?>"
+            action="<?php echo Mage::getStoreConfig('facebooklb/productlike/verb'); ?>"
+            colorscheme="<?php echo Mage::getStoreConfig('facebooklb/productlike/color'); ?>"
+            font="<?php echo Mage::getStoreConfig('facebooklb/productlike/font'); ?>"
+            width="<?php echo Mage::getStoreConfig('facebooklb/productlike/width'); ?>">
+        </fb:like>
+    <?php endif; ?>
+<?php endif; ?>

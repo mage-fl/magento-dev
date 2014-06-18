@@ -1,0 +1,23 @@
+<?php
+    $title = $this->getData('title');
+    $path  = $this->getData('path');
+    $uniqueId = uniqid();
+    list($_thumbnailWidth, $_thumbnailHeight) = explode('x', Mage::getStoreConfig('lightboxpro/size/thumbnail'));
+    $thumbnailWidth = $this->getData('thumbnailwidth');
+    $thumbnailHeight = $this->getData('thumbnailheight');
+    if (!empty($thumbnailWidth)) {
+        $_thumbnailWidth = $thumbnailWidth;
+    }
+    if (!empty($thumbnailHeight)) {
+        $_thumbnailHeight = $thumbnailHeight;
+    }
+?>
+
+<script type="text/javascript">
+    var config<?php echo $uniqueId?> = {
+        slideshowGroup: 'slideshowGroup<?php echo $uniqueId?>'
+    };
+</script>
+<a href="<?php echo Mage::helper('lightboxpro/image')->setImage($path); ?>" class="highslide" onclick="return hs.expand(this, config<?php echo $uniqueId?>)" title="<?php echo $title?>">
+    <img src="<?php echo Mage::helper('lightboxpro/image')->setImage($path)->resize($_thumbnailWidth, $_thumbnailHeight); ?>"  alt="<?php echo $title?>" style="width: <?php echo $_thumbnailWidth;?>;height:<?php echo $_thumbnailHeight?>;"/>
+</a>

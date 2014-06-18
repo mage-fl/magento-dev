@@ -1,0 +1,28 @@
+<?php
+/**
+ * DO NOT REMOVE OR MODIFY THIS NOTICE
+ *
+ * EasyBanner module for Magento - flexible banner management
+ *
+ * @author Templates-Master Team <www.templates-master.com>
+ */
+?>
+
+<?php if (($_banners = $this->getBanners()) && count($_banners)): ?>
+<div class="box box-easybanner-placeholder">
+    <div class="easybanner-placeholder-wrapper">
+    <?php foreach ($_banners as $_banner): ?>
+        <div class="easybanner-banner">
+        <?php echo Mage::helper('easybanner/banner')->load($_banner)->toHtml() ?>
+        </div>
+    <?php endforeach ?>
+    </div>
+</div>
+
+<?php if ($this->getMode() == 'slider'): ?>
+<script type="text/javascript">
+    //insert js for slider
+</script>
+<?php endif ?>
+
+<?php endif ?>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+       <TM_LightboxPro>
+           <version>1.0.1</version>
+       </TM_LightboxPro>
+    </modules>
+
+    <global>
+        <helpers>
+            <lightboxpro>
+                <class>TM_LightboxPro_Helper</class>
+            </lightboxpro>
+        </helpers>
+        <blocks>
+            <lightboxpro>
+                <class>TM_LightboxPro_Block</class>
+            </lightboxpro>
+        </blocks>
+        <models>
+            <lightboxpro>
+                <class>TM_LightboxPro_Model</class>
+               <!-- <resourceModel>lightboxpro_mysql4</resourceModel>-->
+            </lightboxpro>
+        </models>
+    </global>
+
+    <default>
+        <lightboxpro>
+            <general>
+                <enabled>0</enabled>
+                <outlineType>rounded-white</outlineType>
+            </general>
+            <size>
+                <popup>512x512</popup>
+                <main>256x256</main>
+                <thumbnail>56x56</thumbnail>
+                <maxWindow>512x512</maxWindow>
+            </size>
+            <gallery>
+                <controls_presetstyle>1</controls_presetstyle>
+                <controls_position>bottom center</controls_position>
+                <controls_opacity>0.75</controls_opacity>
+                <controls_xOffset>0</controls_xOffset>
+                <controls_yOffset>-10</controls_yOffset>
+                <controls_hideOnMouseOut>1</controls_hideOnMouseOut>
+
+                <numbers_position>0</numbers_position>
+
+                <thumbstrip_enable>1</thumbstrip_enable>
+                <thumbstrip_mode>horizontal</thumbstrip_mode>
+                <thumbstrip_position>bottom center</thumbstrip_position>
+                <thumbstrip_relative>viewport</thumbstrip_relative>
+                <behaviour_fixedControls>1</behaviour_fixedControls>
+                <behaviour_repeat>1</behaviour_repeat>
+                <behaviour_interval>5000</behaviour_interval>
+                <behaviour_autoplay>0</behaviour_autoplay>
+            </gallery>
+
+            <html>
+                <size_width>400</size_width>
+
+<!--                <controls_close>1</controls_close>
+                <controls_resize>1</controls_resize>
+                <controls_contentWrapper>0</controls_contentWrapper>-->
+
+                <titlebar_source>0</titlebar_source>
+            </html>
+
+            <style><!--
+                <thumbnail_explanationlabel>0</thumbnail_explanationlabel>
+
+                <thumbnail_inner_color>#D0D0D0</thumbnail_inner_color>
+                <thumbnail_inner_hovercolor>#A0A0A0</thumbnail_inner_hovercolor>
+                <thumbnail_inner_activecolor>#808080</thumbnail_inner_activecolor>
+                <thumbnail_inner_width>1</thumbnail_inner_width>
+
+                <thumbnail_gallery_width>106</thumbnail_gallery_width>
+                <thumbnail_gallery_height>106</thumbnail_gallery_height>
+                <thumbnail_gallery_borderwidth>1</thumbnail_gallery_borderwidth>
+                <thumbnail_gallery_bordercolor>#D0D0D0</thumbnail_gallery_bordercolor>
+                <thumbnail_gallery_margin>2</thumbnail_gallery_margin>
+                <thumbnail_gallery_background>#EDEDED</thumbnail_gallery_background>
+
+                <loadinglabel_style>0</loadinglabel_style>
+
+                <popupstyles_background>#FFFFFF</popupstyles_background>
+
+                <borderoutline_color>#FFFFFF</borderoutline_color>
+                <borderoutline_width>2</borderoutline_width>
+
+                <graphicoutline_enable>1</graphicoutline_enable>
+                <graphicoutline_color>#FFFFFF</graphicoutline_color>
+                <graphicoutline_width>5</graphicoutline_width>
+                <graphicoutline_radius>5</graphicoutline_radius>
+
+                <graphicoutlineeffects_dropshadow>1</graphicoutlineeffects_dropshadow>
+                <graphicoutlineeffects_opacity>0.75</graphicoutlineeffects_opacity>
+                <graphicoutlineeffects_xoffset>1</graphicoutlineeffects_xoffset>
+                <graphicoutlineeffects_size>3</graphicoutlineeffects_size>
+                <graphicoutlineeffects_yoffset>3</graphicoutlineeffects_yoffset>
+
+-->
+                <dimming_enable>0</dimming_enable>
+<!--                <dimming_color>#000000</dimming_color>-->
+                <dimmingOpacity>0.5</dimmingOpacity>
+<!--                <dimming_fading>50</dimming_fading>-->
+            </style>
+            <behavior>
+
+                <easing>0</easing>
+<!--                <animation_hidethumbnailonexpand>0</animation_hidethumbnailonexpand>
+                <animation_openduration>250</animation_openduration>
+                <animation_closeduration>250</animation_closeduration>
+                <animation_showduration>2</animation_showduration>
+
+-->
+                <anchor>0</anchor>
+                <align>1</align>
+                <width>640</width>
+                <height>480</height>
+                <allowSizeReduction>1</allowSizeReduction>
+                <padToMinWidth>0</padToMinWidth>
+
+                <allowMultipleInstances>1</allowMultipleInstances>
+                <blockRightClick>0</blockRightClick>
+                <enableKeyListener>1</enableKeyListener>
+                <numberOfImagesToPreload>5</numberOfImagesToPreload>
+            </behavior>
+
+            <overlays>
+                <captionEval>this.a.title</captionEval>
+                <captionOverlay_position>below</captionOverlay_position>
+                <captionOverlay_relativeTo>image</captionOverlay_relativeTo>
+
+                <heading_enable>0</heading_enable>
+                <headingEval>this.thumb.title</headingEval>
+                <headingOverlay_position>above</headingOverlay_position>
+                <headingOverlay_relativeTo>image</headingOverlay_relativeTo>
+
+                <closebutton_enable>1</closebutton_enable>
+<!--                <credits_enable>0</credits_enable>
+                <creditsPosition>top left</creditsPosition>-->
+            </overlays>
+        </lightboxpro>
+    </default>
+
+    <frontend>
+        <layout>
+            <updates>
+                <lightboxpro>
+                    <file>tm/lightboxpro.xml</file>
+                </lightboxpro>
+            </updates>
+        </layout>
+<!--        <translate>
+            <modules>
+                <TM_LightboxPro>
+                    <files>
+                        <default>TM_LightboxPro.csv</default>
+                    </files>
+                </TM_LightboxPro>
+            </modules>
+        </translate>-->
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <TM_LightboxPro>
+                    <files>
+                        <default>TM_LightboxPro.csv</default>
+                    </files>
+                </TM_LightboxPro>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <lightboxpro>
+                    <file>tm/lightboxpro.xml</file>
+                </lightboxpro>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <lightboxpro>
+                <use>admin</use>
+                <args>
+                    <module>TM_LightboxPro</module>
+                    <frontName>lightboxpro</frontName>
+                </args>
+            </lightboxpro>
+        </routers>
+    </admin>
+</config>

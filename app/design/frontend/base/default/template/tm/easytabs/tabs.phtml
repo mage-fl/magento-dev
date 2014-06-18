@@ -1,0 +1,45 @@
+<div class="easytabs-wrapper" id="easytabs">
+    <div class="easytabs-ul-wrapper">
+        <ul class="easytabs">
+            <?php foreach ($this->getTabs() as $_index => $_tab) : ?>
+                <?php
+                    if (!($childHtml = $this->getChildHtml($_tab['alias']))
+                        || $this->isEmptyString($childHtml)) :
+
+                        continue;
+                    endif;
+                ?>
+
+                <li>
+                    <a href="#product_tabs_<?php echo $_tab['alias'] ?>"
+                        class="easytabs-anchor easytabs-a easytabs-a-tab"
+                    ><?php echo $this->__($_tab['title']); ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="padder easytabs-content-wrapper">
+        <?php foreach ($this->getTabs() as $_index => $_tab) : ?>
+            <?php
+                if (!($childHtml = $this->getChildHtml($_tab['alias']))
+                    || $this->isEmptyString($childHtml)) :
+
+                    continue;
+                endif;
+            ?>
+
+            <a href="#product_tabs_<?php echo $_tab['alias'] ?>"
+                class="easytabs-anchor easytabs-a easytabs-a-accordion"
+            ><?php echo $this->__($_tab['title']); ?></a>
+            <div class="easytabs-content"
+                id="product_tabs_<?php echo $_tab['alias'] ?>_contents"
+                style="display:none">
+                <?php echo $childHtml; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <script type="text/javascript">
+        var easytabs = new EasyTabs();
+    </script>
+</div>

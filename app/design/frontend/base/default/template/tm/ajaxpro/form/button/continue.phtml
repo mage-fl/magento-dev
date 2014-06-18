@@ -1,0 +1,37 @@
+<?php $label = Mage::helper('ajaxpro')->__('Continue shopping');?>
+<button class="ajaxpro-continue-button ajaxpro-button button">
+    <span><span>
+        <?php echo $label?>
+    </span></span>
+</button>
+<?php $_id = time();?>
+<script type="text/javascript">
+//<![CDATA[
+    var interval, delay<?php echo $_id ?> = <?php echo (int)Mage::getStoreConfig('ajax_pro/effect/autohidemessagedelay')?>;
+    clearInterval(interval);
+    interval = setInterval(function () {
+
+        if (delay<?php echo $_id ?> < 30) {
+
+            var buttons = $$('.ajaxpro-continue-button');
+            if (0 == buttons.length) {
+                clearInterval(interval);
+                return;
+            }
+            var button = buttons.first().down('span span');
+            button.update(
+                Translator.translate('Continue shopping (%d second)')
+                    .replace('%d', delay<?php echo $_id ?>)
+            );
+        }
+
+        if (delay<?php echo $_id ?> > 0 ) {
+            delay<?php echo $_id ?>--;
+        } else {
+            AjaxPro.message.hide();
+            clearInterval(interval);
+        }
+
+    }, 1000);
+//]]>
+</script>

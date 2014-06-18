@@ -1,0 +1,82 @@
+<script type="text/javascript">
+    document.observe("dom:loaded", function() {
+
+        hs.graphicsDir = '<?php echo $this->getSkinUrl('js/tm/lightboxpro/highslide/graphics/');?>';
+        hs.outlineType = '<?php echo Mage::getStoreConfig('lightboxpro/general/outlineType'); ?>';
+        <?php  if (Mage::getStoreConfig('lightboxpro/style/dimming_enable')) : ?>
+        hs.dimmingOpacity = <?php  echo Mage::getStoreConfig('lightboxpro/style/dimmingOpacity') ?>;
+        <?php endif;
+        $easing = Mage::getStoreConfig('lightboxpro/behavior/easing');
+        if (!empty($easing)) : ?>
+         //behavior
+        hs.easing = '<?php echo $easing?>';
+        <?php if ('easeInBack' === $easing) : ?>
+        hs.easingClose = 'easeOutBack';
+        <?php endif;
+            endif;
+        $anchor = Mage::getStoreConfig('lightboxpro/behavior/anchor');
+        if ($anchor) : ?>
+        hs.anchor = '<?php echo $anchor?>';
+        <?php endif;
+        if (Mage::getStoreConfig('lightboxpro/behavior/align')) : ?>
+        hs.align = 'center';
+        <?php endif; ?>
+        hs.width = <?php echo Mage::getStoreConfig('lightboxpro/behavior/width')?>;
+        hs.height = <?php echo Mage::getStoreConfig('lightboxpro/behavior/height')?>;
+        <?php
+        if (Mage::getStoreConfig('lightboxpro/size/maxWindow')) :
+            list($_maxWindowWidth, $_maxWindowHeight) = explode('x', Mage::getStoreConfig('lightboxpro/size/maxWindow'));
+        ?>
+        <?php if (!empty($_maxWindowWidth)) : ?>
+        hs.maxWidth = <?php echo $_maxWindowWidth ?>;
+        <?php endif; ?>
+        <?php if (!empty($_maxWindowHeight)) : ?>
+        hs.maxHeight = <?php echo $_maxWindowHeight ?>;
+        <?php endif; ?>
+        <?php endif; ?>
+        <?php if (!Mage::getStoreConfig('lightboxpro/behavior/allowSizeReduction')) : ?>
+        hs.allowSizeReduction = false;
+        <?php endif;
+        if (Mage::getStoreConfig('lightboxpro/behavior/padToMinWidth')) : ?>
+        hs.padToMinWidth = true;
+        <?php endif;?>
+        <?php  if (!Mage::getStoreConfig('lightboxpro/behavior/allowMultipleInstances')) : ?>
+        hs.allowMultipleInstances = false;
+        <?php endif;  if (!Mage::getStoreConfig('lightboxpro/behavior/blockRightClick')) : ?>
+        hs.blockRightClick = true;
+        <?php endif; if (!Mage::getStoreConfig('lightboxpro/behavior/enableKeyListener')) : ?>
+        hs.enableKeyListener = false;
+        <?php endif; ?>
+        hs.numberOfImagesToPreload = <?php echo Mage::getStoreConfig('lightboxpro/behavior/numberOfImagesToPreload')?>;
+
+        //overlays
+        <?php $source = Mage::getStoreConfig('lightboxpro/overlays/captionEval');
+        if (!empty($source)) :
+        ?>hs.captionEval = '<?php echo $source;?>';
+        <?php endif;?>
+        hs.captionOverlay.position = '<?php echo Mage::getStoreConfig('lightboxpro/overlays/captionOverlay_position');?>';
+        hs.captionOverlay.relativeTo = '<?php echo Mage::getStoreConfig('lightboxpro/overlays/captionOverlay_relativeTo');?>';
+
+        <?php if (Mage::getStoreConfig('lightboxpro/overlays/heading_enable')) :?>
+        <?php $source = Mage::getStoreConfig('lightboxpro/overlays/headingEval');
+        if (!empty($source)) :
+        ?>hs.headingEval = '<?php echo $source;?>';
+        <?php endif;?>
+        hs.headingOverlay.position = '<?php echo Mage::getStoreConfig('lightboxpro/overlays/headingOverlay_position');?>';
+        hs.headingOverlay.relativeTo = '<?php echo Mage::getStoreConfig('lightboxpro/overlays/headingOverlay_relativeTo');?>';
+        <?php endif;?>
+        <?php if (Mage::getStoreConfig('lightboxpro/overlays/heading_enable')) :?>
+        hs.creditsPosition = '<?php echo Mage::getStoreConfig('lightboxpro/overlays/creditsPosition');?>';
+        <?php else :?>
+        hs.showCredits = false;<?php endif;
+        if (Mage::getStoreConfig('lightboxpro/overlays/closebutton_enable')) : ?>
+        hs.registerOverlay({
+            html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
+            position: 'top right',
+            useOnHtml: true,
+            fade: 2 // fading the semi-transparent overlay looks bad in IE
+        });
+        <?php endif;?>
+        hs.allowWidthReduction = true;
+    });
+</script>

@@ -1,0 +1,44 @@
+<div itemscope itemtype="http://data-vocabulary.org/Organization">
+
+    <?php
+        $name        = Mage::getStoreConfig('richsnippets/organization/name');
+        $street      = Mage::getStoreConfig('richsnippets/organization/street');
+        $locality    = Mage::getStoreConfig('richsnippets/organization/locality');
+        $region      = Mage::getStoreConfig('richsnippets/organization/region');
+        $phone       = Mage::getStoreConfig('richsnippets/organization/phone');
+        $url         = Mage::getStoreConfig('richsnippets/organization/url');
+        $postalcode  = Mage::getStoreConfig('richsnippets/organization/postal-code');
+        $countryname = Mage::getStoreConfig('richsnippets/organization/country-name');
+    ?>
+
+    <?php if ($name) : ?>
+        <meta itemprop="name" content="<?php echo $name; ?>" />
+    <?php endif; ?>
+
+    <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+        <?php if ($street) : ?>
+            <meta itemprop="street-address" content="<?php echo $street; ?>" />
+        <?php endif; ?>
+        <?php if ($locality) : ?>
+            <meta itemprop="locality" content="<?php echo $locality; ?>" />
+        <?php endif; ?>
+        <?php if ($region) : ?>
+            <meta itemprop="region" content="<?php echo $region; ?>" />
+        <?php endif; ?>
+        <?php if ($postalcode) : ?>
+            <meta itemprop="postal-code" content="<?php echo $postalcode; ?>" />
+        <?php endif; ?>
+        <?php if ($countryname) : ?>
+            <meta itemprop="country-name" content="<?php echo $countryname; ?>" />
+        <?php endif; ?>
+    </span>
+
+    <?php if ($phone) : ?>
+        <meta itemprop="phone" content="<?php echo $phone; ?>" />
+    <?php endif; ?>
+
+    <?php if ($url) : ?>
+        <link itemprop="url" href="<?php echo $url ?>"/>
+    <?php endif; ?>
+
+</div>
